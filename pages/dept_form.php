@@ -36,28 +36,42 @@
 <html>
     <head>
         <title><?= $editing ? "Modifier" : "Ajouter" ?> un département</title>
+        <link rel="stylesheet" href="../assets/css/style.css">
     </head>
+    
+    <div class="container">
+    
     <body>
     <p><a href="index.php">&larr; Retour aux départements</a></p>
     <h1><?= $editing ? "Modifier le département $dept_no" : "Ajouter un département" ?></h1>
 
     <?php if ($success) { ?>
-        <p style="color:green;">Enregistré.</p>
+        <p class="alert-success">Enregistré.</p>
     <?php } ?>
     <?php if ($error !== '') { ?>
-        <p style="color:red;"><?= htmlspecialchars($error) ?></p>
+        <p class="alert-error"><?= htmlspecialchars($error) ?></p>
     <?php } ?>
 
+    <div class="card">
     <form method="post" action="dept_form.php<?= $editing ? '?dept_no=' . urlencode($dept_no) : '' ?>">
+
         <input type="hidden" name="mode" value="<?= $editing ? 'edit' : 'add' ?>">
-        <p>
-            Numéro (4 car. max) :
-            <input type="text" name="dept_no" maxlength="4"
+        <div class="form-group">
+        <label> Numéro (4 car. max) : </label>
+        <input type="text" name="dept_no" maxlength="4"
                    value="<?= htmlspecialchars($dept_no) ?>"
                    <?= $editing ? 'readonly' : '' ?>>
-        </p>
-        <p>Nom : <input type="text" name="dept_name" value="<?= htmlspecialchars($dept_name) ?>"></p>
-        <p><input type="submit" value="<?= $editing ? 'Modifier' : 'Ajouter' ?>"></p>
+        </div>
+        <div class="form-group">
+        <label>Nom : </label> 
+        <input type="text" name="dept_name" value="<?= htmlspecialchars($dept_name) ?>">
+        </div>
+        <div class="form-group">
+        <input class="btn" type="submit" value="<?= $editing ? 'Modifier' : 'Ajouter' ?>">
+        </div>
     </form>
+</div>
+
+</div>
     </body>
 </html>
