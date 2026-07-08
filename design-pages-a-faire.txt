@@ -1,0 +1,11 @@
+stats.php (OK)
+become_manager.php (OK)
+fiche.php (OK)
+change_dept.php (OK)
+
+
+index(OK)
+emp_form(OK)
+dept_form(OK)
+employees(WIP)
+search(WIP)
