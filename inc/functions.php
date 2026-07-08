@@ -41,7 +41,7 @@ function get_all_departments()
                   AND dm.to_date = '9999-01-01'
             LEFT JOIN employees e
                    ON e.emp_no = dm.emp_no
-            ORDER BY d.dept_no";
+            ORDER BY d.dept_name";
     return get_all_lines($sql);
 }
 

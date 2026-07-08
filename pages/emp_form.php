@@ -73,33 +73,49 @@
 <html>
     <head>
         <title><?= $editing ? "Modifier" : "Ajouter" ?> un employé</title>
+        <link rel="stylesheet" href="../assets/css/style.css">
     </head>
     <body>
+            <div class="container">
     <p><a href="index.php">&larr; Retour aux départements</a></p>
     <h1><?= $editing ? "Modifier l'employé $emp_no" : "Ajouter un employé" ?></h1>
 
     <?php if ($success) { ?>
-        <p style="color:green;">Enregistré.
+        <p class="alert alert-success">Enregistré.
            <a href="fiche.php?emp_no=<?= urlencode($emp_no) ?>">Voir la fiche &rarr;</a></p>
     <?php } ?>
     <?php if ($error !== '') { ?>
-        <p style="color:red;"><?= htmlspecialchars($error) ?></p>
+        <p class="alert alert-error"><?= htmlspecialchars($error) ?></p>
     <?php } ?>
 
+    <div class="card">
     <form method="post" action="emp_form.php<?= $editing ? '?emp_no=' . urlencode($emp_no) : '' ?>">
         <input type="hidden" name="mode" value="<?= $editing ? 'edit' : 'add' ?>">
-        <p>Numéro : <input type="number" name="emp_no" value="<?= htmlspecialchars($emp_no) ?>" <?= $editing ? 'readonly' : '' ?>></p>
-        <p>Prénom : <input type="text" name="first_name" value="<?= htmlspecialchars($first_name) ?>"></p>
-        <p>Nom : <input type="text" name="last_name" value="<?= htmlspecialchars($last_name) ?>"></p>
-        <p>Genre :
+
+        <div class="form-group"><label>Numéro </label> 
+        <input type="number" name="emp_no" value="<?= htmlspecialchars($emp_no) ?>" <?= $editing ? 'readonly' : '' ?>>
+        </div>
+        <div class="form-group">
+        <label> Prénom  </label> <input type="text" name="first_name" value="<?= htmlspecialchars($first_name) ?>">
+        </div>
+        <div class="form-group">
+        <label> Nom : </label> <input type="text" name="last_name" value="<?= htmlspecialchars($last_name) ?>">
+        </div>
+        <div class="form-group">
+        <label>Genre : </label>
             <select name="gender">
                 <option value="M" <?= $gender === 'M' ? 'selected' : '' ?>>M</option>
                 <option value="F" <?= $gender === 'F' ? 'selected' : '' ?>>F</option>
             </select>
-        </p>
-        <p>Date de naissance : <input type="date" name="birth_date" value="<?= htmlspecialchars($birth_date) ?>"></p>
-        <p>Date d'embauche : <input type="date" name="hire_date" value="<?= htmlspecialchars($hire_date) ?>"></p>
-        <p>Département :
+        </div>
+        <div class="form-group">
+        <label>Date de naissance : </label> <input type="date" name="birth_date" value="<?= htmlspecialchars($birth_date) ?>">
+        </div>
+        <div class="form-group">
+        <label>Date d'embauche : </label><input type="date" name="hire_date" value="<?= htmlspecialchars($hire_date) ?>">
+        </div>
+        <div class="form-group">
+        <label>Département : </label>
             <select name="dept_no">
                 <option value="">— Choisir —</option>
                 <?php foreach ($departments as $d) { ?>
@@ -108,14 +124,18 @@
                     </option>
                 <?php } ?>
             </select>
-        </p>
-        <p>
+        </div>
+        <div class="form-group">
+            <input type="checkbox" name="is_manager" value="1" <?= $is_manager ? 'checked' : '' ?>>
             <label>
-                <input type="checkbox" name="is_manager" value="1" <?= $is_manager ? 'checked' : '' ?>>
                 Est manager de ce département
             </label>
-        </p>
-        <p><input type="submit" value="<?= $editing ? 'Modifier' : 'Ajouter' ?>"></p>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="<?= $editing ? 'Modifier' : 'Ajouter' ?>">
+        </div>
     </form>
+</div>
+</div>
     </body>
 </html>
